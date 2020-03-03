@@ -6,8 +6,6 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.car.rental.project.api.enums.VehicleType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//import com.car.rental.project.api.enums.VehicleType;
+
+@JsonIgnoreProperties(value = { "client" })
 @Entity
 @Table(name = "vehicle")
 public class Vehicle implements Serializable {
@@ -28,7 +29,7 @@ public class Vehicle implements Serializable {
 	private static final long serialVersionUID = -4532843363490324779L;
 	
 	private Long id;
-	private VehicleType vehicle;
+	private String vehicle;
 	private Date loanDate;
 	private Date returnDate;
 	private float dailyValue;
@@ -97,12 +98,12 @@ public class Vehicle implements Serializable {
 		this.returnDate = returnDate;
 	}
 	
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.STRING)
 	@Column(name = "vehicle")
-	public VehicleType getVehicle() {
+	public String getVehicle() {
 		return vehicle;
 	}
-	public void setVehicle(VehicleType vehicle) {
+	public void setVehicle(String vehicle) {
 		this.vehicle = vehicle;
 	}
 	
