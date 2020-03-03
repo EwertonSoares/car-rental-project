@@ -6,16 +6,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.car.rental.project.api.enums.PerfilEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name = "client")
@@ -28,23 +25,24 @@ public class Client implements Serializable {
 	private static final long serialVersionUID = -6921839093511674493L;
 	
 	
-	private String ssnOrNrole;
+	private String doc;
 	private String name;
 	private Long zipCode;
 	private String address;
 	private Long phoneNumber;
-	private PerfilEnum perfil;
+	private String perfil;
 	private List<Vehicle> vehiclesRent;
+	//@Enumerated(EnumType.STRING)
+	//private PerfilEnum perfil;
 	
 	
 	@Id
-	@Column(name = "ssn_or_nrole", nullable = false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	public String getSsnOrNrole() {
-		return ssnOrNrole;
+	@Column(name = "doc", nullable = false)
+	public String getDoc() {
+		return doc;
 	}
-	public void setSsnOrNrole(String ssnOrNrole) {
-		this.ssnOrNrole = ssnOrNrole;
+	public void setDoc(String doc) {
+		this.doc = doc;
 	}
 	
 	@Column(name = "name", nullable = false)
@@ -79,12 +77,11 @@ public class Client implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "perfil")
-	public PerfilEnum getPerfil() {
+	public String getPerfil() {
 		return perfil;
 	}
-	public void setPerfil(PerfilEnum perfil) {
+	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
 	
@@ -96,10 +93,10 @@ public class Client implements Serializable {
 	public void setVehiclesRent(List<Vehicle> vehiclesRent) {
 		this.vehiclesRent = vehiclesRent;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Client [ssnOrNrole=" + ssnOrNrole + ", name=" + name + ", zipCode=" + zipCode + ", address=" + address
+		return "Client [ssnOrNrole=" + doc + ", name=" + name + ", zipCode=" + zipCode + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", perfil=" + perfil + ", vehiclesRent=" + vehiclesRent + "]";
 	}
 	
