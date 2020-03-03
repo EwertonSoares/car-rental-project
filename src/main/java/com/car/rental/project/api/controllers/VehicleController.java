@@ -25,6 +25,6 @@ public class VehicleController {
 	 */
 	@RequestMapping(value = "/vehicles", method = RequestMethod.GET)
 	public List<Vehicle> getVehicles() {
-		return vehicleServices.findAllClients();
+		return vehicleServices.findAll();
 	}
 }

@@ -17,9 +17,7 @@ import com.car.rental.project.api.entities.Client;
 public interface ClientRepository extends JpaRepository<Client, String> {
 		
 	Client findClientByZipCode(Long zipCode);
-	
-	List<Client> findAll();
-	
+		
 	@Query
 	Client findByDoc(@Param(value = "doc") String doc);
 	
