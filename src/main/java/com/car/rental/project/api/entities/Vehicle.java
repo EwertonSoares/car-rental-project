@@ -3,12 +3,9 @@ package com.car.rental.project.api.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -42,7 +39,6 @@ public class Vehicle implements Serializable {
 	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -125,7 +121,7 @@ public class Vehicle implements Serializable {
 		this.disponivel = disponivel;
 	}
 	
-	@OneToOne(mappedBy = "vehicle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	public Branch getBranch() {
 		return branch;
 	}
