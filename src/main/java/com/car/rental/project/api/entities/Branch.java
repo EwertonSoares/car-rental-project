@@ -2,15 +2,22 @@ package com.car.rental.project.api.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = { "vehicle" })
 @Entity
 @Table(name = "branch")
 public class Branch implements Serializable {
@@ -24,7 +31,6 @@ public class Branch implements Serializable {
 	private Long id;
 	private String nome;
 	private String address;
-	private String country;
 	private Vehicle vehicle;
 	
 	
@@ -53,17 +59,8 @@ public class Branch implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
-	@Column(name = "country")
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
-	}
-	
-	@OneToOne(fetch = FetchType.EAGER)
+
+	@OneToOne(mappedBy = "branch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public Vehicle getVehicle() {
 		return vehicle;
 	}
@@ -73,7 +70,7 @@ public class Branch implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Branch [id=" + id + ", nome=" + nome + ", address=" + address + ", country=" + country + ", vehicle="
+		return "Branch [id=" + id + ", nome=" + nome + ", address=" + address + ", vehicle="
 				+ vehicle + "]";
 	}
 	

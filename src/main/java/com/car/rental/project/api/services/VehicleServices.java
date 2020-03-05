@@ -1,6 +1,7 @@
 package com.car.rental.project.api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +26,16 @@ public class VehicleServices {
 		return vehicleRepository.findAll();
 }
 	
-	public Vehicle saveVehicle(Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Vehicle> findById(Long id) {
+		LOGGER.info("Buscando veiculo por id");
+		return vehicleRepository.findById(id);
 	}
+	
+
+	public Vehicle saveVehicle(Vehicle vehicle) {
+		LOGGER.info("Salvando Novo veiculo no banco");
+		return vehicleRepository.save(vehicle);
+	}
+
 
 }
